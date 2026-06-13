@@ -301,7 +301,10 @@ def parse_pdf(path):
 
 
 def main():
-    races = [parse_pdf(p) for p in sorted(glob.glob(os.path.join(PDF_DIR, "s_run_hr_*.pdf")))]
+    # 평면(pdfs/*.pdf)·주차폴더(pdfs/YYYY-MM-DD/*.pdf) 모두 지원
+    paths = set(glob.glob(os.path.join(PDF_DIR, "s_run_hr_*.pdf")))
+    paths |= set(glob.glob(os.path.join(PDF_DIR, "**", "s_run_hr_*.pdf"), recursive=True))
+    races = [parse_pdf(p) for p in sorted(paths)]
     with open(OUT_PATH, "w", encoding="utf-8") as f:
         json.dump(races, f, ensure_ascii=False, indent=1)
 

@@ -32,8 +32,10 @@ ENTRY_COLS = [
 ]
 
 SCHEMA = """\
--- xHRrace: KRA 서울 출마표 데이터베이스 (자동 생성 파일, parser/gen_sql.py)
--- Supabase Dashboard → SQL Editor에 전체를 붙여넣고 Run 하세요.
+-- xHRrace: KRA 서울 출마표 DB 전체 스냅샷 (자동 생성, parser/gen_sql.py)
+-- ⚠ LEGACY/파괴적: 아래 DROP 으로 races·entries·predictions 전체를 지우고 다시 만듭니다.
+--   주간 누적에는 쓰지 마세요(지난 주가 사라짐). 누적은 parser/ingest.py 를 쓰고,
+--   신규 설치는 supabase/schema.sql(멱등) + ingest.py 조합을 권장합니다.
 
 drop table if exists public.predictions;
 drop table if exists public.entries;
