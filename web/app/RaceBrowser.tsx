@@ -227,68 +227,68 @@ export default function RaceBrowser({ races }: { races: RaceCard[] }) {
                 key={r.id}
                 href={`/race/${r.id}`}
                 className={
-                  "group rounded-xl border bg-white p-4 shadow-sm transition hover:shadow-md dark:bg-zinc-900 " +
+                  "group rounded-xl border bg-white p-4 shadow-sm transition hover:border-emerald-600 hover:bg-emerald-600 hover:shadow-lg dark:bg-zinc-900 " +
                   (r.hasResults
-                    ? "border-emerald-200 hover:border-emerald-500 dark:border-emerald-900/60"
-                    : "border-zinc-200 hover:border-emerald-500 dark:border-zinc-800")
+                    ? "border-emerald-200 dark:border-emerald-900/60"
+                    : "border-zinc-200 dark:border-zinc-800")
                 }
               >
                 <div className="flex items-baseline justify-between gap-2">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-xl font-extrabold text-emerald-600 dark:text-emerald-400">
+                    <span className="text-xl font-extrabold text-emerald-600 transition-colors group-hover:text-white dark:text-emerald-400">
                       {r.race_no}경주
                     </span>
-                    <span className="text-sm text-zinc-500">
+                    <span className="text-sm text-zinc-500 group-hover:text-emerald-50">
                       출전 {r.entryCount}두
                     </span>
                   </div>
                   {r.hasResults ? (
-                    <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
+                    <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700 group-hover:bg-white dark:bg-emerald-950 dark:text-emerald-300 dark:group-hover:bg-white dark:group-hover:text-emerald-700">
                       완료
                     </span>
                   ) : (
-                    <span className="text-sm text-zinc-500">{r.start_time}</span>
-                  )}
-                </div>
-                <div className="mt-2 flex flex-wrap gap-1.5 text-xs">
-                  <span className="rounded-full bg-zinc-100 px-2 py-0.5 font-medium dark:bg-zinc-800">
-                    {r.grade}
-                  </span>
-                  <span className="rounded-full bg-zinc-100 px-2 py-0.5 dark:bg-zinc-800">
-                    {r.distance_m}m
-                  </span>
-                  <span className="rounded-full bg-zinc-100 px-2 py-0.5 dark:bg-zinc-800">
-                    {r.weight_type}
-                  </span>
-                  {r.rating_range && (
-                    <span className="rounded-full bg-zinc-100 px-2 py-0.5 dark:bg-zinc-800">
-                      {r.rating_range}
+                    <span className="text-sm text-zinc-500 group-hover:text-emerald-50">
+                      {r.start_time}
                     </span>
                   )}
                 </div>
+                <div className="mt-2 flex flex-wrap gap-1.5 text-xs">
+                  {[r.grade, `${r.distance_m}m`, r.weight_type, r.rating_range]
+                    .filter(Boolean)
+                    .map((tag, i) => (
+                      <span
+                        key={i}
+                        className="rounded-full bg-zinc-100 px-2 py-0.5 font-medium text-zinc-600 transition-colors group-hover:bg-emerald-500/80 group-hover:text-white dark:bg-zinc-800 dark:text-zinc-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                </div>
                 {r.race_kind && r.race_kind !== "일반경주" && (
-                  <div className="mt-2 truncate text-xs font-semibold text-amber-600 dark:text-amber-400">
+                  <div className="mt-2 truncate text-xs font-semibold text-amber-600 group-hover:text-amber-200 dark:text-amber-400">
                     {r.race_kind}
                   </div>
                 )}
                 {r.hasResults && (
-                  <div className="mt-2.5 flex items-center gap-1.5 border-t border-zinc-100 pt-2.5 text-xs dark:border-zinc-800">
-                    <span className="font-bold text-rose-500">🏁 1착</span>
+                  <div className="mt-2.5 flex items-center gap-1.5 border-t border-zinc-100 pt-2.5 text-xs group-hover:border-emerald-400/40 dark:border-zinc-800">
+                    <span className="font-bold text-rose-500 group-hover:text-white">
+                      🏁 1착
+                    </span>
                     {r.winnerGate != null && (
-                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-zinc-900 text-[10px] font-bold text-white dark:bg-zinc-100 dark:text-zinc-900">
+                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-zinc-900 text-[10px] font-bold text-white group-hover:bg-white group-hover:text-emerald-700 dark:bg-zinc-100 dark:text-zinc-900">
                         {r.winnerGate}
                       </span>
                     )}
-                    <span className="truncate font-semibold">
+                    <span className="truncate font-semibold group-hover:text-white">
                       {r.winnerName ?? "-"}
                     </span>
                     {r.winHit === true && (
-                      <span className="ml-auto shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 font-bold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
+                      <span className="ml-auto shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 font-bold text-emerald-700 group-hover:bg-white dark:bg-emerald-950 dark:text-emerald-300 dark:group-hover:bg-white dark:group-hover:text-emerald-700">
                         ◎ 적중
                       </span>
                     )}
                     {r.winHit === false && (
-                      <span className="ml-auto shrink-0 rounded-full bg-zinc-100 px-2 py-0.5 font-medium text-zinc-500 dark:bg-zinc-800">
+                      <span className="ml-auto shrink-0 rounded-full bg-zinc-100 px-2 py-0.5 font-medium text-zinc-500 group-hover:bg-emerald-700 group-hover:text-emerald-50 dark:bg-zinc-800">
                         예측 빗나감
                       </span>
                     )}
