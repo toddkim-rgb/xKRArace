@@ -8,6 +8,12 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  /* 메인 팔레트 (#163445 딥 네이비 기준 매칭 배색) */
+  --color-navy: #163445;
+  --color-navydark: #0f2733;
+  --color-navylite: #1f4a5f;
+  --color-brandteal: #2a9d8f;
+  --color-gold: #e9c46a;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

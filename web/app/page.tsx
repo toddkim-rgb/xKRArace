@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { supabase, type Race } from "@/lib/supabase";
 import RaceBrowser, { type RaceCard } from "./RaceBrowser";
 
@@ -81,22 +80,12 @@ export default async function Home() {
 
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-10">
-      <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-extrabold tracking-tight">
-            서울 경마 출마표
-          </h1>
-          <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-            KRA 상세 출마표 · {meetings}개 경기일 · 경주 {races.length}건 ·{" "}
-            {cards.reduce((n, r) => n + r.entryCount, 0)}두 출전
-          </p>
-        </div>
-        <Link
-          href="/stats"
-          className="rounded-xl border border-zinc-200 bg-white px-4 py-2 text-sm font-bold text-zinc-700 shadow-sm transition hover:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200"
-        >
-          적중률 통계
-        </Link>
+      <header className="mb-8">
+        <h1 className="text-3xl font-extrabold tracking-tight">경주 일정</h1>
+        <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+          KRA 상세 출마표 · {meetings}개 경기일 · 경주 {races.length}건 ·{" "}
+          {cards.reduce((n, r) => n + r.entryCount, 0)}두 출전
+        </p>
       </header>
 
       {races.length === 0 ? (

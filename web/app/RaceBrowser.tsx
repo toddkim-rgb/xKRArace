@@ -227,7 +227,7 @@ export default function RaceBrowser({ races }: { races: RaceCard[] }) {
                 key={r.id}
                 href={`/race/${r.id}`}
                 className={
-                  "group rounded-xl border bg-white p-4 shadow-sm transition hover:border-emerald-600 hover:bg-emerald-600 hover:shadow-lg dark:bg-zinc-900 " +
+                  "group rounded-xl border bg-white p-4 shadow-sm transition hover:border-navy hover:bg-navy hover:shadow-lg dark:bg-zinc-900 " +
                   (r.hasResults
                     ? "border-emerald-200 dark:border-emerald-900/60"
                     : "border-zinc-200 dark:border-zinc-800")
@@ -238,7 +238,7 @@ export default function RaceBrowser({ races }: { races: RaceCard[] }) {
                     <span className="text-xl font-extrabold text-emerald-600 transition-colors group-hover:text-white dark:text-emerald-400">
                       {r.race_no}경주
                     </span>
-                    <span className="text-sm text-zinc-500 group-hover:text-emerald-50">
+                    <span className="text-sm text-zinc-500 group-hover:text-white/80">
                       출전 {r.entryCount}두
                     </span>
                   </div>
@@ -247,7 +247,7 @@ export default function RaceBrowser({ races }: { races: RaceCard[] }) {
                       완료
                     </span>
                   ) : (
-                    <span className="text-sm text-zinc-500 group-hover:text-emerald-50">
+                    <span className="text-sm text-zinc-500 group-hover:text-white/80">
                       {r.start_time}
                     </span>
                   )}
@@ -258,24 +258,24 @@ export default function RaceBrowser({ races }: { races: RaceCard[] }) {
                     .map((tag, i) => (
                       <span
                         key={i}
-                        className="rounded-full bg-zinc-100 px-2 py-0.5 font-medium text-zinc-600 transition-colors group-hover:bg-emerald-500/80 group-hover:text-white dark:bg-zinc-800 dark:text-zinc-300"
+                        className="rounded-full bg-zinc-100 px-2 py-0.5 font-medium text-zinc-600 transition-colors group-hover:bg-white/15 group-hover:text-white dark:bg-zinc-800 dark:text-zinc-300"
                       >
                         {tag}
                       </span>
                     ))}
                 </div>
                 {r.race_kind && r.race_kind !== "일반경주" && (
-                  <div className="mt-2 truncate text-xs font-semibold text-amber-600 group-hover:text-amber-200 dark:text-amber-400">
+                  <div className="mt-2 truncate text-xs font-semibold text-amber-600 group-hover:text-gold dark:text-amber-400">
                     {r.race_kind}
                   </div>
                 )}
                 {r.hasResults && (
-                  <div className="mt-2.5 flex items-center gap-1.5 border-t border-zinc-100 pt-2.5 text-xs group-hover:border-emerald-400/40 dark:border-zinc-800">
+                  <div className="mt-2.5 flex items-center gap-1.5 border-t border-zinc-100 pt-2.5 text-xs group-hover:border-white/20 dark:border-zinc-800">
                     <span className="font-bold text-rose-500 group-hover:text-white">
                       🏁 1착
                     </span>
                     {r.winnerGate != null && (
-                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-zinc-900 text-[10px] font-bold text-white group-hover:bg-white group-hover:text-emerald-700 dark:bg-zinc-100 dark:text-zinc-900">
+                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-zinc-900 text-[10px] font-bold text-white group-hover:bg-white group-hover:text-navy dark:bg-zinc-100 dark:text-zinc-900">
                         {r.winnerGate}
                       </span>
                     )}
@@ -288,7 +288,7 @@ export default function RaceBrowser({ races }: { races: RaceCard[] }) {
                       </span>
                     )}
                     {r.winHit === false && (
-                      <span className="ml-auto shrink-0 rounded-full bg-zinc-100 px-2 py-0.5 font-medium text-zinc-500 group-hover:bg-emerald-700 group-hover:text-emerald-50 dark:bg-zinc-800">
+                      <span className="ml-auto shrink-0 rounded-full bg-zinc-100 px-2 py-0.5 font-medium text-zinc-500 group-hover:bg-white/15 group-hover:text-white dark:bg-zinc-800">
                         예측 빗나감
                       </span>
                     )}
