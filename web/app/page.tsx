@@ -77,7 +77,9 @@ export default async function Home() {
     };
   });
 
-  const meetings = new Set(races.map((r) => r.race_date)).size;
+  const upcoming = cards.filter((c) => !c.hasResults);
+  const doneCount = cards.length - upcoming.length;
+  const meetings = new Set(upcoming.map((r) => r.race_date)).size;
 
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-10">
@@ -87,8 +89,15 @@ export default async function Home() {
             서울 경마 출마표
           </h1>
           <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-            KRA 상세 출마표 · {meetings}개 경기일 · 경주 {races.length}건 ·{" "}
-            {cards.reduce((n, r) => n + r.entryCount, 0)}두 출전
+            KRA 상세 출마표 · 예정 {meetings}개 경기일 · {upcoming.length}경주
+            {doneCount > 0 && (
+              <>
+                {" · "}
+                <Link href="/stats" className="underline hover:text-emerald-600">
+                  완료 {doneCount}건은 적중률 통계
+                </Link>
+              </>
+            )}
           </p>
         </div>
         <Link
@@ -106,7 +115,7 @@ export default async function Home() {
           적재하세요.
         </div>
       ) : (
-        <RaceBrowser races={cards} />
+        <RaceBrowser races={upcoming} />
       )}
 
       <footer className="mt-8 border-t border-zinc-200 pt-6 text-center text-xs text-zinc-400 dark:border-zinc-800">
