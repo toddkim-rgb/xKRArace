@@ -31,7 +31,7 @@ function fullLabel(d: string) {
   return `${dt.getFullYear()}년 ${dt.getMonth() + 1}월 ${dt.getDate()}일 (${DAYS[dt.getDay()]})`;
 }
 
-type Status = "all" | "upcoming" | "done";
+type Status = "upcoming" | "done";
 
 function Chip({
   active,
@@ -58,45 +58,51 @@ function Chip({
 }
 
 export default function RaceBrowser({ races }: { races: RaceCard[] }) {
-  const [status, setStatus] = useState<Status>("all");
+  const [status, setStatus] = useState<Status>("upcoming");
   const [date, setDate] = useState<string>("all");
   const [grades, setGrades] = useState<Set<string>>(new Set());
   const [dists, setDists] = useState<Set<number>>(new Set());
 
+  // 상태(예정/완료)로 먼저 거른 집합 — 날짜·등급·거리 칩도 이 집합 기준으로 생성
+  const statusFiltered = useMemo(
+    () => races.filter((r) => (status === "done" ? r.hasResults : !r.hasResults)),
+    [races, status],
+  );
+
   const dates = useMemo(
-    () => [...new Set(races.map((r) => r.race_date))].sort(),
-    [races],
+    () => [...new Set(statusFiltered.map((r) => r.race_date))].sort(),
+    [statusFiltered],
   );
   const allGrades = useMemo(
-    () => [...new Set(races.map((r) => r.grade).filter(Boolean) as string[])],
-    [races],
+    () =>
+      [...new Set(statusFiltered.map((r) => r.grade).filter(Boolean) as string[])],
+    [statusFiltered],
   );
   const allDists = useMemo(
     () =>
-      [...new Set(races.map((r) => r.distance_m).filter(Boolean) as number[])].sort(
-        (a, b) => a - b,
-      ),
-    [races],
+      [
+        ...new Set(
+          statusFiltered.map((r) => r.distance_m).filter(Boolean) as number[],
+        ),
+      ].sort((a, b) => a - b),
+    [statusFiltered],
   );
 
   const doneCount = races.filter((r) => r.hasResults).length;
-  const counts = {
-    all: races.length,
+  const counts: Record<Status, number> = {
     upcoming: races.length - doneCount,
     done: doneCount,
   };
 
   const filtered = useMemo(
     () =>
-      races.filter((r) => {
-        if (status === "done" && !r.hasResults) return false;
-        if (status === "upcoming" && r.hasResults) return false;
+      statusFiltered.filter((r) => {
         if (date !== "all" && r.race_date !== date) return false;
         if (grades.size && !grades.has(r.grade ?? "")) return false;
         if (dists.size && !dists.has(r.distance_m ?? -1)) return false;
         return true;
       }),
-    [races, status, date, grades, dists],
+    [statusFiltered, date, grades, dists],
   );
 
   const byDate = useMemo(() => {
@@ -116,18 +122,23 @@ export default function RaceBrowser({ races }: { races: RaceCard[] }) {
     setter(next);
   };
 
-  const filtersActive =
-    status !== "all" || date !== "all" || grades.size > 0 || dists.size > 0;
+  // 예정/완료 전환 시 하위 필터 초기화
+  const changeStatus = (s: Status) => {
+    setStatus(s);
+    setDate("all");
+    setGrades(new Set());
+    setDists(new Set());
+  };
+
+  const filtersActive = date !== "all" || grades.size > 0 || dists.size > 0;
   const reset = () => {
-    setStatus("all");
     setDate("all");
     setGrades(new Set());
     setDists(new Set());
   };
 
   const STATUS_TABS: { key: Status; label: string }[] = [
-    { key: "all", label: "전체" },
-    { key: "upcoming", label: "예정·진행" },
+    { key: "upcoming", label: "예정" },
     { key: "done", label: "완료" },
   ];
 
@@ -138,11 +149,11 @@ export default function RaceBrowser({ races }: { races: RaceCard[] }) {
         {STATUS_TABS.map((t) => (
           <button
             key={t.key}
-            onClick={() => setStatus(t.key)}
+            onClick={() => changeStatus(t.key)}
             className={
               "rounded-lg px-4 py-1.5 text-sm font-bold transition " +
               (status === t.key
-                ? "bg-white text-emerald-600 shadow-sm dark:bg-zinc-800 dark:text-emerald-400"
+                ? "bg-navy text-white shadow-sm"
                 : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300")
             }
           >
@@ -203,13 +214,14 @@ export default function RaceBrowser({ races }: { races: RaceCard[] }) {
 
       {/* 결과 */}
       <p className="mb-4 text-sm text-zinc-500">
-        {filtered.length}개 경주
-        {status === "done" && " · 결과 입력 완료"}
+        {status === "done" ? "완료" : "예정"} {filtered.length}경주
       </p>
 
       {filtered.length === 0 && (
         <div className="rounded-xl border border-dashed border-zinc-300 p-10 text-center text-sm text-zinc-500 dark:border-zinc-700">
-          조건에 맞는 경주가 없습니다.
+          {status === "done"
+            ? "완료(결과 입력)된 경주가 없습니다."
+            : "예정 경주가 없습니다. 새 출마표를 적재하면 표시됩니다."}
         </div>
       )}
 
