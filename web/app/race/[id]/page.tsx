@@ -125,7 +125,7 @@ export default async function RacePage({
       <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm">
         <Link
           href="/"
-          className="font-medium text-emerald-600 hover:underline dark:text-emerald-400"
+          className="font-medium text-brandteal hover:underline"
         >
           ← 전체 경주
         </Link>
@@ -138,7 +138,7 @@ export default async function RacePage({
               className={
                 "rounded-md px-2 py-0.5 " +
                 (s.id === r.id
-                  ? "bg-emerald-600 font-bold text-white"
+                  ? "bg-brandteal font-bold text-white"
                   : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700")
               }
             >
@@ -148,7 +148,7 @@ export default async function RacePage({
         </div>
       </nav>
 
-      <header className="mb-6 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+      <header className="mb-6 rounded-2xl border border-zinc-200 border-l-4 border-l-navy bg-white p-5 shadow-sm dark:border-zinc-800 dark:border-l-navylite dark:bg-zinc-900">
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <h1 className="text-2xl font-extrabold">
             {r.venue} {r.race_no}경주
@@ -190,7 +190,7 @@ export default async function RacePage({
       />
 
       <div className="mb-2 flex items-center justify-between">
-        <h2 className="text-sm font-bold text-zinc-700 dark:text-zinc-300">
+        <h2 className="text-sm font-bold text-navy dark:text-white">
           출전마 상세
         </h2>
         <div className="flex gap-1 text-xs">
@@ -199,7 +199,7 @@ export default async function RacePage({
             className={
               "rounded-md px-2.5 py-1 font-medium " +
               (!sortByGate
-                ? "bg-emerald-600 text-white"
+                ? "bg-brandteal text-white"
                 : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300")
             }
           >
@@ -210,7 +210,7 @@ export default async function RacePage({
             className={
               "rounded-md px-2.5 py-1 font-medium " +
               (sortByGate
-                ? "bg-emerald-600 text-white"
+                ? "bg-brandteal text-white"
                 : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300")
             }
           >
@@ -247,8 +247,8 @@ export default async function RacePage({
               <tr
                 key={e.id}
                 className={
-                  "border-b border-zinc-100 last:border-0 hover:bg-emerald-50/40 dark:border-zinc-800/60 dark:hover:bg-emerald-950/20" +
-                  (p?.rank === 1 ? " bg-emerald-50/60 dark:bg-emerald-950/30" : "")
+                  "border-b border-zinc-100 last:border-0 hover:bg-brandteal/5 dark:border-zinc-800/60 dark:hover:bg-brandteal/10" +
+                  (p?.rank === 1 ? " bg-brandteal/5 dark:bg-brandteal/10" : "")
                 }
               >
                 <td className="px-3 py-3 text-center">

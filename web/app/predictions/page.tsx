@@ -56,7 +56,7 @@ export default async function PredictionsPage() {
       <nav className="mb-6 flex flex-wrap gap-x-4 text-sm">
         <Link
           href="/"
-          className="font-medium text-emerald-600 hover:underline dark:text-emerald-400"
+          className="font-medium text-brandteal hover:underline"
         >
           ← 전체 경주
         </Link>
@@ -68,7 +68,7 @@ export default async function PredictionsPage() {
         </Link>
       </nav>
       <header className="mb-8">
-        <h1 className="text-3xl font-extrabold tracking-tight">예상 우승마</h1>
+        <h1 className="text-3xl font-extrabold tracking-tight text-navy dark:text-white">예상 우승마</h1>
         <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
           레이팅 · 전적 · 기수/조교사 승률 · 최고기록 · 부담중량 증감을 경주
           내에서 정규화해 산출한 우승 확률입니다. ◎ 1순위 ○ 2순위 ▲ 3순위
@@ -77,7 +77,7 @@ export default async function PredictionsPage() {
 
       {[...byDate.entries()].map(([date, list]) => (
         <section key={date} className="mb-10">
-          <h2 className="mb-4 border-b border-zinc-200 pb-2 text-lg font-bold dark:border-zinc-800">
+          <h2 className="mb-4 border-b border-navy/20 pb-2 text-lg font-bold text-navy dark:border-zinc-800 dark:text-white">
             {formatDate(date)}
           </h2>
           <div className="overflow-x-auto rounded-2xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
@@ -101,12 +101,12 @@ export default async function PredictionsPage() {
                   return (
                     <tr
                       key={r.id}
-                      className="border-b border-zinc-100 last:border-0 hover:bg-emerald-50/40 dark:border-zinc-800/60 dark:hover:bg-emerald-950/20"
+                      className="border-b border-zinc-100 last:border-0 hover:bg-brandteal/5 dark:border-zinc-800/60 dark:hover:bg-brandteal/10"
                     >
                       <td className="px-3 py-3 whitespace-nowrap">
                         <Link
                           href={`/race/${r.id}`}
-                          className="font-bold text-emerald-600 hover:underline dark:text-emerald-400"
+                          className="font-bold text-brandteal hover:underline"
                         >
                           {r.race_no}경주
                         </Link>

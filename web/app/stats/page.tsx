@@ -80,7 +80,7 @@ export default async function StatsPage() {
       <nav className="mb-6 flex flex-wrap gap-x-4 text-sm">
         <Link
           href="/"
-          className="font-medium text-emerald-600 hover:underline dark:text-emerald-400"
+          className="font-medium text-brandteal hover:underline"
         >
           ← 전체 경주
         </Link>
@@ -93,7 +93,7 @@ export default async function StatsPage() {
       </nav>
 
       <header className="mb-8">
-        <h1 className="text-3xl font-extrabold tracking-tight">적중률 통계</h1>
+        <h1 className="text-3xl font-extrabold tracking-tight text-navy dark:text-white">적중률 통계</h1>
         <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
           실제 결과가 입력된 경주만 집계합니다. 결과는 각 경주 상세 페이지에서
           입력할 수 있습니다.
@@ -137,13 +137,13 @@ export default async function StatsPage() {
                 <div className="text-sm font-semibold text-zinc-500">
                   {c.label}
                 </div>
-                <div className="mt-1 text-4xl font-extrabold text-emerald-600 dark:text-emerald-400">
+                <div className="mt-1 text-4xl font-extrabold text-brandteal">
                   {pct(c.value)}
                 </div>
                 <div className="mt-1 text-xs text-zinc-400">{c.sub}</div>
                 <div className="mt-3 h-2 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
                   <div
-                    className="h-full rounded-full bg-emerald-500"
+                    className="h-full rounded-full bg-brandteal"
                     style={{ width: `${c.value * 100}%` }}
                   />
                 </div>
@@ -151,7 +151,7 @@ export default async function StatsPage() {
             ))}
           </div>
 
-          <h2 className="mb-3 text-lg font-bold">경주별 적중 내역</h2>
+          <h2 className="mb-3 text-lg font-bold text-navy dark:text-white">경주별 적중 내역</h2>
           <div className="overflow-x-auto rounded-2xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
             <table className="w-full min-w-[560px] text-sm">
               <thead>
@@ -172,7 +172,7 @@ export default async function StatsPage() {
                     <td className="px-3 py-2.5">
                       <Link
                         href={`/race/${race.id}`}
-                        className="font-medium text-emerald-600 hover:underline dark:text-emerald-400"
+                        className="font-medium text-brandteal hover:underline"
                       >
                         {formatDate(race.race_date)} {race.race_no}R
                       </Link>

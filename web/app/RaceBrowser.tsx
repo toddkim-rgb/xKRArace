@@ -48,7 +48,7 @@ function Chip({
       className={
         "rounded-full px-3 py-1 text-xs font-medium transition " +
         (active
-          ? "bg-emerald-600 text-white"
+          ? "bg-brandteal text-white"
           : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700")
       }
     >
@@ -227,7 +227,7 @@ export default function RaceBrowser({ races }: { races: RaceCard[] }) {
 
       {byDate.map(([d, list]) => (
         <section key={d} className="mb-10">
-          <h2 className="mb-4 border-b border-zinc-200 pb-2 text-lg font-bold dark:border-zinc-800">
+          <h2 className="mb-4 border-b border-navy/20 pb-2 text-lg font-bold text-navy dark:border-zinc-800 dark:text-white">
             {fullLabel(d)}
             <span className="ml-2 text-sm font-normal text-zinc-400">
               {list.length}경주
@@ -241,13 +241,13 @@ export default function RaceBrowser({ races }: { races: RaceCard[] }) {
                 className={
                   "group rounded-xl border bg-white p-4 shadow-sm transition hover:border-navy hover:bg-navy hover:shadow-lg dark:bg-zinc-900 " +
                   (r.hasResults
-                    ? "border-emerald-200 dark:border-emerald-900/60"
+                    ? "border-brandteal/30 dark:border-brandteal/20"
                     : "border-zinc-200 dark:border-zinc-800")
                 }
               >
                 <div className="flex items-baseline justify-between gap-2">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-xl font-extrabold text-emerald-600 transition-colors group-hover:text-white dark:text-emerald-400">
+                    <span className="text-xl font-extrabold text-brandteal transition-colors group-hover:text-white">
                       {r.race_no}경주
                     </span>
                     <span className="text-sm text-zinc-500 group-hover:text-white/80">
@@ -255,7 +255,7 @@ export default function RaceBrowser({ races }: { races: RaceCard[] }) {
                     </span>
                   </div>
                   {r.hasResults ? (
-                    <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700 group-hover:bg-white dark:bg-emerald-950 dark:text-emerald-300 dark:group-hover:bg-white dark:group-hover:text-emerald-700">
+                    <span className="rounded-full bg-brandteal/10 px-2 py-0.5 text-xs font-bold text-brandteal group-hover:bg-white group-hover:text-brandteal dark:bg-brandteal/20 dark:text-brandteal dark:group-hover:bg-white dark:group-hover:text-brandteal">
                       완료
                     </span>
                   ) : (
