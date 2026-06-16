@@ -295,7 +295,7 @@ export default function RaceBrowser({ races }: { races: RaceCard[] }) {
                       {r.winnerName ?? "-"}
                     </span>
                     {r.winHit === true && (
-                      <span className="ml-auto shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 font-bold text-emerald-700 group-hover:bg-white dark:bg-emerald-950 dark:text-emerald-300 dark:group-hover:bg-white dark:group-hover:text-emerald-700">
+                      <span className="ml-auto shrink-0 rounded-full bg-gold px-2 py-0.5 font-bold text-navy group-hover:bg-gold group-hover:text-navy dark:bg-gold dark:text-navy">
                         ◎ 적중
                       </span>
                     )}
