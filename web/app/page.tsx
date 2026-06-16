@@ -83,8 +83,7 @@ export default async function Home() {
       <header className="mb-8">
         <h1 className="text-3xl font-extrabold tracking-tight">경주 일정</h1>
         <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-          KRA 상세 출마표 · {meetings}개 경기일 · 경주 {races.length}건 ·{" "}
-          {cards.reduce((n, r) => n + r.entryCount, 0)}두 출전
+          KRA 서울 경마장 출마표를 분석해 레이팅·전적·기수 데이터 기반으로 우승 확률을 예측하고, 실제 경기 결과를 입력해 적중률을 추적하는 서비스입니다.
         </p>
       </header>
 
